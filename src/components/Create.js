@@ -20,7 +20,7 @@ function Create(props){
                   await axios.post(`${baseURL}/contacts`,contact)
                     .then(res=>{
                       setContact(initState)
-                      toast.success("user created")
+                      toast.success("Task created")
                       navigate('/');
                     }).catch(err=>toast.error(err.message))
               }else {
@@ -41,7 +41,7 @@ function Create(props){
                         <div className="card-body">
                             <form autoComplete="off" onSubmit={submitHandler}>
                                 <div className="form-group mt-2">
-                                  <label htmlFor="name">Name</label>
+                                  <label htmlFor="name">Task Name</label>
                                   <input type="text" name="name" value={contact.name} onChange={readValue} id="name" minLength={3}
                                    className="form-control" required  />
                                    {
@@ -50,43 +50,14 @@ function Create(props){
                                     ) : null
                                    }
                                 </div>
+                                
                                 <div className="form-group mt-2">
-                                  <label htmlFor="email">Email</label>
-                                  <input type="email" name="email" value={contact.email} onChange={readValue} id="email" placeholder="user@gmail.com" 
-                                  className="form-control" required/>
-                                  {
-                                    errors && errors.email?(
-                                      <div className="alert alert-danger">{errors.email}</div>
-                                    ):null
-                                   }
-                                </div>
-                                <div className="form-group mt-2">
-                                  <label htmlFor="image">Profile Image</label>
-                                  <input type="url" name="image" value={contact.image} onChange={readValue} id="image" placeholder="enter  url or image link" 
-                                  className="form-control"  required/>
-                                  {
-                                    errors && errors.image?(
-                                      <div className="alert alert-danger">{errors.image}</div>
-                                    ):null
-                                   }
-                                  </div>  
-                                <div className="form-group mt-2">
-                                  <label htmlFor="mobile">Mobile</label>
-                                  <input type="number" name="mobile" value={contact.mobile} onChange={readValue} id="mobile"
-                                   className="form-control" required/>
-                                   {
-                                    errors && errors.mobile?(
-                                      <div className="alert alert-danger">{errors.mobile}</div>
-                                    ):null
-                                   }
-                                  </div>  
-                                <div className="form-group mt-2">
-                                  <label htmlFor="address">Address</label>
-                                  <textarea name="address" value={contact.address} onChange={readValue} id="address" cols="30" rows="5"
+                                  <label htmlFor="description">Description</label>
+                                  <textarea name="description" value={contact.description} onChange={readValue} id="description" cols="30" rows="5"
                                    className="form-control" required />
                                    {
-                                    errors && errors.address?(
-                                      <div className="alert alert-danger">{errors.address}</div>
+                                    errors && errors.description?(
+                                      <div className="alert alert-danger">{errors.description}</div>
                                     ):null
                                    }
                                   </div>  

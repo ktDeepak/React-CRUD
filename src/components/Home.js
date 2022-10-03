@@ -29,16 +29,29 @@ function Home(props){
         getContacts()
     },[contacts,props.itemCount,itemOff])
     const deleteHandler=async(id)=>{
-        if (window.confirm(`Are you sure to delete contact item ${id}?`)){
+        if (window.confirm(`Are you sure to delete task item ${id}?`)){
             await axios.delete(`${baseURL}/contacts/${id}`)
             .then(res=>{
-                toast.success("Contact delete successfully")
+                toast.success("Task delete successfully")
                 navigate('/')
             }).catch(err=>toast.error(err.message))
         }else {
             toast.warning('delete terminated')
         }
     }
+
+    const completeHandler=async(id)=>{
+        if (window.confirm(`Are you sure to complete task item ${id}?`)){
+            await axios.complete(`${baseURL}/contacts/${id}`)
+            .then(res=>{
+                toast.success("Task completed successfully")
+                navigate('/')
+            }).catch(err=>toast.error(err.message))
+        }else {
+            toast.warning('task complete terminated')
+        }
+    }
+
 
     //pagination handler
     const handleClick=(event,value)=>{
@@ -50,7 +63,7 @@ function Home(props){
         <div className="container">
             <div className="row">
                 <div className="col-md-12 text-center">
-                    <h5 className="display-5">Contacts List</h5>
+                    <h5 className="display-5">Tasks List</h5>
                 </div>
             </div>
 
@@ -58,28 +71,16 @@ function Home(props){
                 {
                     curItem && curItem.map((item,index)=>{
                         return (
-                            <div className="col-md-6 mt-2" key={index}>
+                            <div className="col-md-12 mt-2" key={index}>
                                 <div className="card mb-2">
-                                    <div className="row g-0">
-                                        <div className="col-md-4">
-                                            <img src={item.image} alt={item.name} className="card-img-top"/>
-                                        </div>
-                                        <div className="col-md-8">
+                                        <div className="col-md-12">
                                             <div className="card-body">
-                                                <h5 className="text-center text-uppercase">{item.name}{item.id}</h5>
+                                                <h5 className="text-center text-uppercase">{item.id} - {item.name} </h5>
                                                 <ul className="list-group">
                                                     <li className="list-group-item">
-                                                    <strong>Email</strong>
-                                                    <span className="float-end">{item.email}</span>
-                                                    </li>
-                                                    <li className="list-group-item">
-                                                    <strong>Mobile</strong>
-                                                    <span className="float-end">{item.mobile}</span>
-                                                    </li>
-                                                    <li className="list-group-item">
                                                        <details>
-                                                        <summary>Address</summary>
-                                                        <p>{item.address}</p>
+                                                        <summary>Description</summary>
+                                                        <p>{item.description}</p>
                                                        </details>
                                                     </li>
                                                 </ul>
@@ -91,9 +92,12 @@ function Home(props){
                                                 <button onClick={()=>deleteHandler(item.id)} className="btn btn-sm btn-danger float-end">
                                                     <i className="bi bi-trash"></i>
                                                 </button>
+                                                <button onClick={()=>completeHandler(item.id)} className="btn btn-sm btn-success float-end">
+                                                    completed
+                                                </button>
                                             </div>  
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         )

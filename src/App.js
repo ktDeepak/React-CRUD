@@ -15,11 +15,11 @@ function App(props) {
      <Menu/>
      <ToastContainer autoClose={2000} position={"bottom-center"}/>
      <Routes> 
-      <Route path={`/`} element={<Home itemCount={4}/>}/>
-      <Route path={`/home`} element={<Home itemCount={4}/>}/>
+      <Route path={`/`} element={<Home itemCount={3}/>}/>
+      <Route path={`/home`} element={<Home itemCount={3}/>}/>
       <Route path={`/create`} element={<Create/>}/>
       <Route path={`/update/:contactId`} element={<Update/>}/>
-      {/* <Route path={`/*`} element={<Pnf/>}/> */}
+      <Route path={`/*`} element={<Pnf/>}/>
      </Routes>
     </BrowserRouter>
   )
